@@ -10,6 +10,7 @@
 body {
   font-family: 'Open Sans', sans-serif;
   padding: 0rem 1rem 2rem 1rem;
+  color: #21201c;
 }
 
 header {
@@ -109,10 +110,41 @@ header > h1 {
 }
 
 .options {
-  max-width: 200px;
+  min-width: 200px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .dropdown {
   padding: 0.25rem;
   border: 1px solid black;
+}
+
+.wrapper-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.options > span {
+  margin-bottom: 0.5rem;
+}
+
+.options label {
+  font-size: 0.75rem;
+  color: #63635e;
+}
+
+.btn {
+  padding: 0.25rem 0.875rem 0.25rem 0.875rem;
+  border: 1px solid #63635e;
+  background-color: #f1f0ef;
+  border-radius: 4px;
+}
+
+.btn:hover {
+  background-color: #21201c;
+  color: #f1f0ef;
 }

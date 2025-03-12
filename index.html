@@ -9,11 +9,19 @@
   <body>
     <header id="header">
       <h1>THE DIGITAL ARCHITECTURAL MUSEUM</h1>
-      <div id="filtering-options" class="options"></div>
-      <div id="sorting-options" class="options">
-        <button id="sort-by-country">Sort by Country</button>
-        <button id="random-building">Random Building</button>
-        <button id="reset-gallery">Reset Gallery</button>
+      <div class="wrapper-row">
+        <div id="filtering-options" class="options">
+          <span>Filter</span>
+        </div>
+        <div id="sorting-options" class="options">
+          <span>Sort</span>
+          <button class="btn" id="sort-by-country">Sort by Country</button>
+        </div>
+        <div class="options">
+          <span>Extras</span>
+          <button class="btn" id="random-building">Random Building</button>
+          <button class="btn" id="reset-gallery">Reset Gallery</button>
+        </div>
       </div>
     </header>
     <main id="mainHtml"></main>
