@@ -1,9 +1,10 @@
 import { buildings } from './data/data.js';
 
-const header = document.getElementById('header');
+// const header = document.getElementById('header');
 const mainHtml = document.getElementById('mainHtml');
 const filteringOptions = document.getElementById('filtering-options');
 const sortingOptions = document.getElementById('filtering-options');
+const btnSortingByCountry = document.getElementById('sort-by-country');
 
 // Create an array of unique countries present in the database and sort them Alphabetically
 const uniqueCountries = [
@@ -23,6 +24,7 @@ const createSelectInput = (options, label) => {
   const select = document.createElement('select');
   select.id = label.toLowerCase();
   select.name = label;
+  select.classList.add('dropdown');
   selectDiv.append(selectLabel, select);
 
   const defaultOption = document.createElement('option');
@@ -65,15 +67,38 @@ const createBuildingCards = (array) => {
     const dataWrapper = document.createElement('div');
     dataWrapper.classList.add('card-data-wrapper');
 
-    const title = document.createElement('span');
-    title.classList.add('building-title');
-    title.textContent = building.title;
+    // Destructuring the object for easier access to properties
+    const { title, architect, builtYear, ...otherProps } = building;
 
-    const architect = document.createElement('span');
-    architect.classList.add('building-architect');
-    architect.textContent = building.architect;
+    if (title) {
+      const span = document.createElement('span');
+      span.classList.add(`building-title`);
+      span.textContent = building.title;
+      dataWrapper.append(span);
+    }
 
-    dataWrapper.append(title, architect);
+    if (architect) {
+      const span = document.createElement('span');
+      span.classList.add(`building-architect`);
+      span.textContent = `${building.architect} - ${building.builtYear}`;
+      dataWrapper.append(span);
+    }
+
+    // creating a tag wrapper for the card
+    const tagsWrapper = document.createElement('div');
+    tagsWrapper.classList.add('tags-wrapper');
+    dataWrapper.appendChild(tagsWrapper);
+
+    // Looping through the remaining properties
+    Object.entries(otherProps).forEach(([key, value]) => {
+      if (key !== 'image') {
+        const span = document.createElement('span');
+        span.classList.add(`tag`);
+        span.textContent = value;
+        tagsWrapper.append(span);
+      }
+    });
+
     card.append(imgWrapper, dataWrapper);
     buildingsContainer.appendChild(card);
   });
@@ -92,35 +117,65 @@ const createAlertCard = () => {
   mainHtml.appendChild(container);
 };
 
+const getFilteredBuildings = (buildings, country, architect) => {
+  let filteredBuildings = buildings;
+  if (country !== '') {
+    filteredBuildings = filteredBuildings.filter(
+      (building) => building.country === country
+    );
+  }
+  if (architect !== '') {
+    filteredBuildings = filteredBuildings.filter(
+      (building) => building.architect === architect
+    );
+  }
+  return filteredBuildings;
+};
+
+// Sorting function
+const sortBuildings = (buildingsToSort, sortBy = 'country') => {
+  return [...buildingsToSort].sort((a, b) =>
+    a[sortBy].localeCompare(b[sortBy])
+  );
+};
+
 document.addEventListener('DOMContentLoaded', () => {
-  createBuildingCards(buildings);
+  // createBuildingCards(buildings);
 
-  const selectCountry = createSelectInput(uniqueCountries, 'Country');
-  const selectArchitect = createSelectInput(uniqueArchitects, 'Architect');
+  // Current state
+  let currentBuildings = buildings;
 
-  function filterBuildings() {
-    const selectedCountry = selectCountry.value;
-    const selectedArchitect = selectArchitect.value;
-    let filteredBuildings = buildings;
+  // Render the select input elements
+  const selectCountryInput = createSelectInput(uniqueCountries, 'Country');
+  const selectArchitectInput = createSelectInput(uniqueArchitects, 'Architect');
 
-    if (selectedCountry !== '') {
-      filteredBuildings = filteredBuildings.filter(
-        (building) => building.country === selectedCountry
-      );
-    }
-    if (selectedArchitect !== '') {
-      filteredBuildings = filteredBuildings.filter(
-        (building) => building.architect === selectedArchitect
-      );
-    }
+  function handleFilter() {
+    // Filter
+    const selectedCountry = selectCountryInput.value;
+    const selectedArchitect = selectArchitectInput.value;
+    const filteredBuildings = getFilteredBuildings(
+      buildings,
+      selectedCountry,
+      selectedArchitect
+    );
+
     if (filteredBuildings.length === 0) {
       createAlertCard();
       return;
     }
 
-    createBuildingCards(filteredBuildings);
+    // Sort
+    currentBuildings = sortBuildings(filteredBuildings, 'country');
+
+    // Display the cards
+    createBuildingCards(currentBuildings);
+    return currentBuildings;
   }
 
-  selectCountry.addEventListener('change', filterBuildings);
-  selectArchitect.addEventListener('change', filterBuildings);
+  // Event Listeners
+  selectCountryInput.addEventListener('change', handleFilter);
+  selectArchitectInput.addEventListener('change', handleFilter);
+
+  // Initial Display
+  handleFilter();
 });

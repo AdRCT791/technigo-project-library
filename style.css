@@ -43,10 +43,7 @@ header > h1 {
   gap: 0.5rem;
   overflow: hidden;
   position: relative;
-}
-
-.card:hover {
-  border-color: red;
+  padding: 0.5rem;
 }
 
 .card-img-wrapper {
@@ -65,15 +62,33 @@ header > h1 {
   position: absolute;
   top: 0;
   left: 0;
+  filter: grayscale(100%);
+}
+
+.card-img-wrapper img:hover {
+  filter: grayscale(25%);
+  transition: filter 0.3s ease-in-out;
 }
 
 .card-data-wrapper {
   grid-area: data;
   display: flex;
   flex-direction: column;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  padding-bottom: 0.5rem;
+}
+
+.tags-wrapper {
+  margin-top: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.tag {
+  background-color: #dad9d6;
+  padding: 0 0.5rem 0 0.5rem;
+  border-radius: 4px;
 }
 
 .building-title {
@@ -91,4 +106,13 @@ header > h1 {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+}
+
+.options {
+  max-width: 200px;
+}
+
+.dropdown {
+  padding: 0.25rem;
+  border: 1px solid black;
 }
