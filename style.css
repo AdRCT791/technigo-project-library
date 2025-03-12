@@ -34,7 +34,7 @@ header > h1 {
 }
 
 .card {
-  border: 1px solid black;
+  border: 1px solid #63635e;
   display: grid;
   grid-template-rows: 1fr 100px;
   grid-template-areas:

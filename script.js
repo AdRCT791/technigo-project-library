@@ -5,6 +5,8 @@ const mainHtml = document.getElementById('mainHtml');
 const filteringOptions = document.getElementById('filtering-options');
 const sortingOptions = document.getElementById('filtering-options');
 const btnSortingByCountry = document.getElementById('sort-by-country');
+const btnRandomBuilding = document.getElementById('random-building');
+const btnResetGallery = document.getElementById('reset-gallery');
 
 // Create an array of unique countries present in the database and sort them Alphabetically
 const uniqueCountries = [
@@ -132,22 +134,41 @@ const getFilteredBuildings = (buildings, country, architect) => {
   return filteredBuildings;
 };
 
-// Sorting function
-const sortBuildings = (buildingsToSort, sortBy = 'country') => {
-  return [...buildingsToSort].sort((a, b) =>
-    a[sortBy].localeCompare(b[sortBy])
-  );
+// Retrieve a random index from a given array
+const getRandomIndex = (array) => Math.floor(Math.random() * array.length);
+
+const pickRandomBuilding = () => {
+  const randomIndex = getRandomIndex(buildings);
+  let randomBuilding = buildings;
+  randomBuilding = [buildings[randomIndex]];
+  createBuildingCards(randomBuilding);
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-  // createBuildingCards(buildings);
+const resetGallery = () => createBuildingCards(buildings);
 
+document.addEventListener('DOMContentLoaded', () => {
   // Current state
   let currentBuildings = buildings;
 
   // Render the select input elements
   const selectCountryInput = createSelectInput(uniqueCountries, 'Country');
   const selectArchitectInput = createSelectInput(uniqueArchitects, 'Architect');
+
+  const handleSort = () => {
+    let sortOrder = 'asc';
+
+    return () => {
+      sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+
+      const sortedBuildings = [...currentBuildings].sort((a, b) => {
+        const comparison = a.country.localeCompare(b.country);
+        return sortOrder === `asc` ? comparison : -comparison;
+      });
+
+      currentBuildings = sortedBuildings;
+      createBuildingCards(currentBuildings);
+    };
+  };
 
   function handleFilter() {
     // Filter
@@ -164,10 +185,8 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Sort
-    currentBuildings = sortBuildings(filteredBuildings, 'country');
-
-    // Display the cards
+    // Update current state
+    currentBuildings = filteredBuildings;
     createBuildingCards(currentBuildings);
     return currentBuildings;
   }
@@ -175,6 +194,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Event Listeners
   selectCountryInput.addEventListener('change', handleFilter);
   selectArchitectInput.addEventListener('change', handleFilter);
+  btnSortingByCountry.addEventListener('click', handleSort());
+  btnRandomBuilding.addEventListener('click', pickRandomBuilding);
+  btnResetGallery.addEventListener('click', resetGallery);
 
   // Initial Display
   handleFilter();
