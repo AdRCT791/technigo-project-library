@@ -1,5 +1,9 @@
 import { buildings } from './data/data.js';
-import { shuffleArray, getFilteredBuildings, getRandomIndex } from './utils.js';
+import {
+  shuffleArray,
+  getFilteredBuildings,
+  getRandomIndex,
+} from './js/utils.js';
 
 // const header = document.getElementById('header');
 const mainHtml = document.getElementById('mainHtml');
