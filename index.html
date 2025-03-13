@@ -11,17 +11,26 @@
       <h1>THE DIGITAL ARCHITECTURAL MUSEUM</h1>
       <div class="wrapper-row">
         <div id="filtering-options" class="options">
-          <span>Filter</span>
+          <span>Filter by</span>
         </div>
         <div id="sorting-options" class="options">
-          <span>Sort</span>
-          <button class="btn" id="sort-by-country">Sort by Country</button>
+          <span>Sort by</span>
         </div>
         <div class="options">
           <span>Extras</span>
+          <div class="select-input">
+            <label for="q">Search</label>
+            <input
+              type="search"
+              name="q"
+              id="search-input"
+              class="search-bar"
+            />
+          </div>
           <button class="btn" id="random-building">Random Building</button>
           <button class="btn" id="reset-gallery">Reset Gallery</button>
         </div>
+        <div class="options"></div>
       </div>
     </header>
     <main id="mainHtml"></main>

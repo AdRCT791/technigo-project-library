@@ -1,12 +1,13 @@
 import { buildings } from './data/data.js';
+import { shuffleArray, getFilteredBuildings, getRandomIndex } from './utils.js';
 
 // const header = document.getElementById('header');
 const mainHtml = document.getElementById('mainHtml');
 const filteringOptions = document.getElementById('filtering-options');
-const sortingOptions = document.getElementById('filtering-options');
-const btnSortingByCountry = document.getElementById('sort-by-country');
+const sortingOptions = document.getElementById('sorting-options');
 const btnRandomBuilding = document.getElementById('random-building');
 const btnResetGallery = document.getElementById('reset-gallery');
+const searchInput = document.getElementById('search-input');
 
 // Create an array of unique countries present in the database and sort them Alphabetically
 const uniqueCountries = [
@@ -17,7 +18,7 @@ const uniqueArchitects = [
   ...new Set(buildings.map((buildings) => buildings.architect).sort()),
 ];
 
-const createSelectInput = (options, label) => {
+const createSelectInput = (options, label, container) => {
   const selectDiv = document.createElement('div');
   selectDiv.classList.add('select-input');
   const selectLabel = document.createElement('label');
@@ -45,7 +46,7 @@ const createSelectInput = (options, label) => {
 
   // Append the select input to the header
   select.appendChild(optGroup);
-  filteringOptions.appendChild(selectDiv);
+  container.appendChild(selectDiv);
   return select;
 };
 
@@ -119,24 +120,6 @@ const createAlertCard = () => {
   mainHtml.appendChild(container);
 };
 
-const getFilteredBuildings = (buildings, country, architect) => {
-  let filteredBuildings = buildings;
-  if (country !== '') {
-    filteredBuildings = filteredBuildings.filter(
-      (building) => building.country === country
-    );
-  }
-  if (architect !== '') {
-    filteredBuildings = filteredBuildings.filter(
-      (building) => building.architect === architect
-    );
-  }
-  return filteredBuildings;
-};
-
-// Retrieve a random index from a given array
-const getRandomIndex = (array) => Math.floor(Math.random() * array.length);
-
 const pickRandomBuilding = () => {
   const randomIndex = getRandomIndex(buildings);
   let randomBuilding = buildings;
@@ -148,32 +131,47 @@ const resetGallery = () => createBuildingCards(buildings);
 
 document.addEventListener('DOMContentLoaded', () => {
   // Current state
-  let currentBuildings = buildings;
-
+  let currentBuildings = shuffleArray(buildings);
   // Render the select input elements
-  const selectCountryInput = createSelectInput(uniqueCountries, 'Country');
-  const selectArchitectInput = createSelectInput(uniqueArchitects, 'Architect');
+  const selectCountryInput = createSelectInput(
+    uniqueCountries,
+    'Country',
+    filteringOptions
+  );
+  const selectArchitectInput = createSelectInput(
+    uniqueArchitects,
+    'Architect',
+    filteringOptions
+  );
 
+  const buildingProps = Object.keys(buildings[0]);
+  buildingProps.pop();
+  const selectPropsInput = createSelectInput(
+    buildingProps,
+    'Property',
+    sortingOptions
+  );
+
+  // Function that handles the sorting of buildings by country
   const handleSort = () => {
-    let sortOrder = 'asc';
+    const selectedProp = selectPropsInput.value;
+    console.log(selectedProp);
 
-    return () => {
-      sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
-
-      const sortedBuildings = [...currentBuildings].sort((a, b) => {
-        const comparison = a.country.localeCompare(b.country);
-        return sortOrder === `asc` ? comparison : -comparison;
-      });
-
-      currentBuildings = sortedBuildings;
-      createBuildingCards(currentBuildings);
-    };
+    const sortedBuildings = [...currentBuildings].sort((a, b) => {
+      const valueA = a[selectedProp] || '';
+      const valueB = b[selectedProp] || '';
+      return valueA.localeCompare(valueB);
+    });
+    // Update current state with sorted buildings and rerender cards
+    currentBuildings = sortedBuildings;
+    createBuildingCards(currentBuildings);
   };
 
   function handleFilter() {
     // Filter
     const selectedCountry = selectCountryInput.value;
     const selectedArchitect = selectArchitectInput.value;
+
     const filteredBuildings = getFilteredBuildings(
       buildings,
       selectedCountry,
@@ -187,17 +185,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update current state
     currentBuildings = filteredBuildings;
-    createBuildingCards(currentBuildings);
+    // createBuildingCards(currentBuildings);
     return currentBuildings;
   }
 
   // Event Listeners
   selectCountryInput.addEventListener('change', handleFilter);
   selectArchitectInput.addEventListener('change', handleFilter);
-  btnSortingByCountry.addEventListener('click', handleSort());
+  selectPropsInput.addEventListener('change', handleSort);
   btnRandomBuilding.addEventListener('click', pickRandomBuilding);
   btnResetGallery.addEventListener('click', resetGallery);
 
-  // Initial Display
-  handleFilter();
+  // Search
+  searchInput.addEventListener('keyup', (e) => {
+    let currentSearch = e.target.value.toLowerCase();
+    const searchBuildings = currentBuildings.filter(
+      (building) =>
+        building.architect.toLowerCase().includes(currentSearch) ||
+        building.title.toLowerCase().includes(currentSearch)
+    );
+    createBuildingCards(searchBuildings);
+  });
+
+  // // Initial Display
+  createBuildingCards(shuffleArray(currentBuildings));
 });
