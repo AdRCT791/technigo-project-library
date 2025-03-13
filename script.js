@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     // Update current state with sorted buildings and rerender cards
     currentBuildings = sortedBuildings;
-    createBuildingCards(currentBuildings);
+    return currentBuildings;
   };
 
   function handleFilter() {
@@ -182,17 +182,24 @@ document.addEventListener('DOMContentLoaded', () => {
       createAlertCard();
       return;
     }
-
     // Update current state
     currentBuildings = filteredBuildings;
-    // createBuildingCards(currentBuildings);
     return currentBuildings;
   }
 
   // Event Listeners
-  selectCountryInput.addEventListener('change', handleFilter);
-  selectArchitectInput.addEventListener('change', handleFilter);
-  selectPropsInput.addEventListener('change', handleSort);
+  selectCountryInput.addEventListener('change', () => {
+    const filtered = handleFilter();
+    if (filtered) createBuildingCards(filtered);
+  });
+  selectArchitectInput.addEventListener('change', () => {
+    const filtered = handleFilter();
+    if (filtered) createBuildingCards(filtered);
+  });
+  selectPropsInput.addEventListener('change', () => {
+    const sorted = handleSort();
+    if (sorted) createBuildingCards(sorted);
+  });
   btnRandomBuilding.addEventListener('click', pickRandomBuilding);
   btnResetGallery.addEventListener('click', resetGallery);
 
