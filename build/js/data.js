@@ -5,7 +5,7 @@ export const buildings = [
         type: 'House',
         builtYear: 1949,
         country: 'USA',
-        image: new URL('../data/buildings-images/glass-house-philip-johnson.webp', import.meta.url).href,
+        image: new URL('../../src/data/buildings-images/glass-house-philip-johnson.webp', import.meta.url).href,
     },
     {
         title: 'Villa Savoye',
@@ -13,7 +13,7 @@ export const buildings = [
         type: 'House',
         builtYear: 1931,
         country: 'France',
-        image: new URL('../data/buildings-images/villa-savoye-lecorbusier.webp', import.meta.url).href,
+        image: new URL('../../src/data/buildings-images/villa-savoye-lecorbusier.webp', import.meta.url).href,
     },
     {
         title: 'Fallingwater',
@@ -21,7 +21,7 @@ export const buildings = [
         type: 'House',
         builtYear: 1935,
         country: 'USA',
-        image: new URL('../data/buildings-images/fallingwater-frank-lloyd-wright.webp', import.meta.url).href,
+        image: new URL('../../src/data/buildings-images/fallingwater-frank-lloyd-wright.webp', import.meta.url).href,
     },
     {
         title: 'Barcelona Pavilion',
@@ -29,7 +29,7 @@ export const buildings = [
         type: 'Exhibition',
         builtYear: 1929,
         country: 'Spain',
-        image: new URL('../data/buildings-images/barcelona-pavilion-ludwig-mies-van-der-rohe.webp', import.meta.url).href,
+        image: new URL('../../src/data/buildings-images/barcelona-pavilion-ludwig-mies-van-der-rohe.webp', import.meta.url).href,
     },
     {
         title: 'Villa Mairea',
@@ -37,7 +37,7 @@ export const buildings = [
         type: 'House',
         builtYear: 1939,
         country: 'Finland',
-        image: new URL('../data/buildings-images/villa-mairea-alvar-aalto.webp', import.meta.url).href,
+        image: new URL('../../src/data/buildings-images/villa-mairea-alvar-aalto.webp', import.meta.url).href,
     },
     {
         title: 'Kaufmann House',
@@ -45,7 +45,7 @@ export const buildings = [
         type: 'House',
         builtYear: 1946,
         country: 'USA',
-        image: new URL('../data/buildings-images/kaufmann-house-richard-neutra.webp', import.meta.url).href,
+        image: new URL('../../src/data/buildings-images/kaufmann-house-richard-neutra.webp', import.meta.url).href,
     },
     {
         title: 'Can Lis',
@@ -53,7 +53,7 @@ export const buildings = [
         type: 'House',
         builtYear: 1971,
         country: 'Spain',
-        image: new URL('../data/buildings-images/can-lis-jorn-utzon.webp', import.meta.url).href,
+        image: new URL('../../src/data/buildings-images/can-lis-jorn-utzon.webp', import.meta.url).href,
     },
     {
         title: 'Eames House',
@@ -61,7 +61,7 @@ export const buildings = [
         type: 'House',
         builtYear: 1949,
         country: 'USA',
-        image: new URL('../data/buildings-images/eames-house-eames.webp', import.meta.url).href,
+        image: new URL('../../src/data/buildings-images/eames-house-eames.webp', import.meta.url).href,
     },
     {
         title: 'Sydney Opera House',
@@ -69,7 +69,7 @@ export const buildings = [
         type: 'Performance Hall',
         builtYear: 1973,
         country: 'Australia',
-        image: new URL('../data/buildings-images/sydney-opera-house-jorn-utzon.webp', import.meta.url).href,
+        image: new URL('../../src/data/buildings-images/sydney-opera-house-jorn-utzon.webp', import.meta.url).href,
     },
     {
         title: 'Notre Dame du Haut',
@@ -77,7 +77,7 @@ export const buildings = [
         type: 'Church',
         builtYear: 1955,
         country: 'France',
-        image: new URL('../data/buildings-images/notre-dame-du-haut-lecorbusier.webp', import.meta.url).href,
+        image: new URL('../../src/data/buildings-images/notre-dame-du-haut-lecorbusier.webp', import.meta.url).href,
     },
     {
         title: 'Guggenheim Museum',
@@ -85,7 +85,7 @@ export const buildings = [
         type: 'Museum',
         builtYear: 1959,
         country: 'USA',
-        image: new URL('../data/buildings-images/guggenheim-nyc-frank-lloyd-wright.webp', import.meta.url).href,
+        image: new URL('../../src/data/buildings-images/guggenheim-nyc-frank-lloyd-wright.webp', import.meta.url).href,
     },
     {
         title: 'Seagram Building',
@@ -93,6 +93,6 @@ export const buildings = [
         type: 'Office',
         builtYear: 1958,
         country: 'USA',
-        image: new URL('../data/buildings-images/seagram-building-miesvanderrohe.webp', import.meta.url).href,
+        image: new URL('../../src/data/buildings-images/seagram-building-miesvanderrohe.webp', import.meta.url).href,
     },
 ];

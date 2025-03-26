@@ -15,7 +15,7 @@ export const buildings: Building[] = [
     builtYear: 1949,
     country: 'USA',
     image: new URL(
-      '../data/buildings-images/glass-house-philip-johnson.webp',
+      '../../src/data/buildings-images/glass-house-philip-johnson.webp',
       import.meta.url
     ).href,
   },
@@ -26,7 +26,7 @@ export const buildings: Building[] = [
     builtYear: 1931,
     country: 'France',
     image: new URL(
-      '../data/buildings-images/villa-savoye-lecorbusier.webp',
+      '../../src/data/buildings-images/villa-savoye-lecorbusier.webp',
       import.meta.url
     ).href,
   },
@@ -37,7 +37,7 @@ export const buildings: Building[] = [
     builtYear: 1935,
     country: 'USA',
     image: new URL(
-      '../data/buildings-images/fallingwater-frank-lloyd-wright.webp',
+      '../../src/data/buildings-images/fallingwater-frank-lloyd-wright.webp',
       import.meta.url
     ).href,
   },
@@ -48,7 +48,7 @@ export const buildings: Building[] = [
     builtYear: 1929,
     country: 'Spain',
     image: new URL(
-      '../data/buildings-images/barcelona-pavilion-ludwig-mies-van-der-rohe.webp',
+      '../../src/data/buildings-images/barcelona-pavilion-ludwig-mies-van-der-rohe.webp',
       import.meta.url
     ).href,
   },
@@ -59,7 +59,7 @@ export const buildings: Building[] = [
     builtYear: 1939,
     country: 'Finland',
     image: new URL(
-      '../data/buildings-images/villa-mairea-alvar-aalto.webp',
+      '../../src/data/buildings-images/villa-mairea-alvar-aalto.webp',
       import.meta.url
     ).href,
   },
@@ -70,7 +70,7 @@ export const buildings: Building[] = [
     builtYear: 1946,
     country: 'USA',
     image: new URL(
-      '../data/buildings-images/kaufmann-house-richard-neutra.webp',
+      '../../src/data/buildings-images/kaufmann-house-richard-neutra.webp',
       import.meta.url
     ).href,
   },
@@ -81,7 +81,7 @@ export const buildings: Building[] = [
     builtYear: 1971,
     country: 'Spain',
     image: new URL(
-      '../data/buildings-images/can-lis-jorn-utzon.webp',
+      '../../src/data/buildings-images/can-lis-jorn-utzon.webp',
       import.meta.url
     ).href,
   },
@@ -92,7 +92,7 @@ export const buildings: Building[] = [
     builtYear: 1949,
     country: 'USA',
     image: new URL(
-      '../data/buildings-images/eames-house-eames.webp',
+      '../../src/data/buildings-images/eames-house-eames.webp',
       import.meta.url
     ).href,
   },
@@ -103,7 +103,7 @@ export const buildings: Building[] = [
     builtYear: 1973,
     country: 'Australia',
     image: new URL(
-      '../data/buildings-images/sydney-opera-house-jorn-utzon.webp',
+      '../../src/data/buildings-images/sydney-opera-house-jorn-utzon.webp',
       import.meta.url
     ).href,
   },
@@ -114,7 +114,7 @@ export const buildings: Building[] = [
     builtYear: 1955,
     country: 'France',
     image: new URL(
-      '../data/buildings-images/notre-dame-du-haut-lecorbusier.webp',
+      '../../src/data/buildings-images/notre-dame-du-haut-lecorbusier.webp',
       import.meta.url
     ).href,
   },
@@ -125,7 +125,7 @@ export const buildings: Building[] = [
     builtYear: 1959,
     country: 'USA',
     image: new URL(
-      '../data/buildings-images/guggenheim-nyc-frank-lloyd-wright.webp',
+      '../../src/data/buildings-images/guggenheim-nyc-frank-lloyd-wright.webp',
       import.meta.url
     ).href,
   },
@@ -136,7 +136,7 @@ export const buildings: Building[] = [
     builtYear: 1958,
     country: 'USA',
     image: new URL(
-      '../data/buildings-images/seagram-building-miesvanderrohe.webp',
+      '../../src/data/buildings-images/seagram-building-miesvanderrohe.webp',
       import.meta.url
     ).href,
   },
