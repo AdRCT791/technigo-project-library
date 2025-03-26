@@ -27,3 +27,7 @@ export const getFilteredBuildings = (
   }
   return filteredBuildings;
 };
+
+// Retrieve a random index from a given array
+export const getRandomIndex = <T>(array: T[]): number =>
+  Math.floor(Math.random() * array.length);

@@ -16,3 +16,5 @@ export const getFilteredBuildings = (buildings, country, architect) => {
     }
     return filteredBuildings;
 };
+// Retrieve a random index from a given array
+export const getRandomIndex = (array) => Math.floor(Math.random() * array.length);

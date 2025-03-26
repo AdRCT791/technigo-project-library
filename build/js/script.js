@@ -9,9 +9,9 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import { buildings } from './dataOld.js';
-import { shuffleArray, getFilteredBuildings, getRandomIndex, } from './utilsOld.js';
-// const header = document.getElementById('header');
+import { buildings } from './data';
+import { shuffleArray, getFilteredBuildings, getRandomIndex } from './utils';
+// DOM Elements
 const mainHtml = document.getElementById('mainHtml');
 const filteringOptions = document.getElementById('filtering-options');
 const sortingOptions = document.getElementById('sorting-options');
@@ -54,13 +54,13 @@ const createSelectInput = (options, label, container) => {
     return select;
 };
 // Function that creates a card for each building in the database
-const createBuildingCards = (array) => {
+const createBuildingCards = (buildings) => {
     mainHtml.innerHTML = '';
     const buildingsContainer = document.createElement('div');
     buildingsContainer.classList.add('container-buildings');
     buildingsContainer.innerHTML = '';
     mainHtml.appendChild(buildingsContainer);
-    array.forEach((building) => {
+    buildings.forEach((building) => {
         const card = document.createElement('div');
         card.classList.add('card');
         const imgWrapper = document.createElement('div');
@@ -134,8 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedProp = selectPropsInput.value;
         console.log(selectedProp);
         const sortedBuildings = [...currentBuildings].sort((a, b) => {
-            const valueA = a[selectedProp] || '';
-            const valueB = b[selectedProp] || '';
+            const valueA = String(a[selectedProp] || '');
+            const valueB = String(b[selectedProp] || '');
             return valueA.localeCompare(valueB);
         });
         // Update current state with sorted buildings and rerender cards
@@ -175,10 +175,12 @@ document.addEventListener('DOMContentLoaded', () => {
     btnResetGallery.addEventListener('click', resetGallery);
     // Search
     searchInput.addEventListener('keyup', (e) => {
-        let currentSearch = e.target.value.toLowerCase();
-        const searchBuildings = currentBuildings.filter((building) => building.architect.toLowerCase().includes(currentSearch) ||
-            building.title.toLowerCase().includes(currentSearch));
-        createBuildingCards(searchBuildings);
+        if (e.target) {
+            let currentSearch = e.target.value.toLowerCase();
+            const searchBuildings = currentBuildings.filter((building) => building.architect.toLowerCase().includes(currentSearch) ||
+                building.title.toLowerCase().includes(currentSearch));
+            createBuildingCards(searchBuildings);
+        }
     });
     // // Initial Display
     createBuildingCards(shuffleArray(currentBuildings));
