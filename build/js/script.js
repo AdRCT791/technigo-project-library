@@ -132,7 +132,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function that handles the sorting of buildings by country
     const handleSort = () => {
         const selectedProp = selectPropsInput.value;
-        console.log(selectedProp);
         const sortedBuildings = [...currentBuildings].sort((a, b) => {
             const valueA = String(a[selectedProp] || '');
             const valueB = String(b[selectedProp] || '');
@@ -175,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnResetGallery.addEventListener('click', resetGallery);
     // Search
     searchInput.addEventListener('keyup', (e) => {
-        if (e.target) {
+        if (e.target instanceof HTMLInputElement) {
             let currentSearch = e.target.value.toLowerCase();
             const searchBuildings = currentBuildings.filter((building) => building.architect.toLowerCase().includes(currentSearch) ||
                 building.title.toLowerCase().includes(currentSearch));

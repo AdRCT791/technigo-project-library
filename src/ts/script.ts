@@ -29,7 +29,7 @@ const uniqueArchitects: string[] = [
 const createSelectInput = (
   options: string[],
   label: string,
-  container: HTMLDivElement
+  container: HTMLElement
 ): HTMLSelectElement => {
   const selectDiv = document.createElement('div');
   selectDiv.classList.add('select-input');
@@ -167,7 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Function that handles the sorting of buildings by country
   const handleSort = (): Building[] => {
     const selectedProp = selectPropsInput.value as keyof Building;
-    console.log(selectedProp);
 
     const sortedBuildings = [...currentBuildings].sort((a, b) => {
       const valueA = String(a[selectedProp] || '');
@@ -217,8 +216,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Search
   searchInput.addEventListener('keyup', (e: Event) => {
-    if (e.target) {
-      let currentSearch = (e.target as HTMLInputElement).value.toLowerCase();
+    if (e.target instanceof HTMLInputElement) {
+      let currentSearch = e.target.value.toLowerCase();
       const searchBuildings = currentBuildings.filter(
         (building) =>
           building.architect.toLowerCase().includes(currentSearch) ||
